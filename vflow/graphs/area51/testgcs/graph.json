@@ -1,0 +1,84 @@
+{
+    "properties": {},
+    "description": "testgcs",
+    "processes": {
+        "wiretap1": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 510,
+                "y": 226,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "oldreadfile1": {
+            "component": "com.sap.storage.read",
+            "metadata": {
+                "label": "[OLD] Read File",
+                "x": 231,
+                "y": 308,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "service": "GCS",
+                    "path": "/tc_di_export_bw.csv",
+                    "gcsConnection": {
+                        "configurationType": "Configuration Manager",
+                        "connectionID": "GoogleCloudStorage"
+                    },
+                    "gcsBucket": "",
+                    "onlyReadOnChange": true
+                }
+            }
+        },
+        "oldwritefile1": {
+            "component": "com.sap.storage.write",
+            "metadata": {
+                "label": "[OLD] Write File",
+                "x": 612,
+                "y": 276,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "service": "FILE",
+                    "mode": "overwrite",
+                    "path": "/vrep/tmp.csv"
+                }
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "355,357 430,357 430,266 505,266"
+            },
+            "src": {
+                "port": "outFile",
+                "process": "oldreadfile1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "634,266 684,266 684,291 557,291 557,316 607,316"
+            },
+            "src": {
+                "port": "out",
+                "process": "wiretap1"
+            },
+            "tgt": {
+                "port": "inFile",
+                "process": "oldwritefile1"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}
