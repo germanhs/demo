@@ -24,7 +24,7 @@
                 "width": 120,
                 "config": {
                     "service": "GCS",
-                    "path": "/tc_di_export_bw.csv",
+                    "path": "/tc_di_export_bw2.csv",
                     "gcsConnection": {
                         "configurationType": "Configuration Manager",
                         "connectionID": "GoogleCloudStorage"
